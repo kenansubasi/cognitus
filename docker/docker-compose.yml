@@ -1,0 +1,10 @@
+version: '3'
+services:
+  db:
+    image: postgres
+  web:
+    build:
+      context: ..
+      dockerfile: docker/web/Dockerfile
+    depends_on:
+      - db

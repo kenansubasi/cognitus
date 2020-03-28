@@ -1,0 +1,10 @@
+[run]
+source = ./cognitus
+omit =
+    */migrations/*
+    */settings.py
+    */tests.py
+    */urls*.py
+    cognitus/management/commands/initdb.py
+    cognitus/wsgi.py
+    manage.py

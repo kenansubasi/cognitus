@@ -7,6 +7,7 @@ from django.test import TestCase
 
 
 class CognitusTestCase(TestCase):
+    USER_ID = 1
     USER_USERNAME = "admin"
     USER_PASSWORD = "secret"  # common password for each user.
 
@@ -32,4 +33,4 @@ class CognitusApiTestCase(CognitusTestCase):
         self.token, created = Token.objects.get_or_create(user=self.user)
 
     def api_authentication(self):
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)

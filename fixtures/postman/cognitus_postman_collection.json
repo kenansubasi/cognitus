@@ -9,7 +9,8 @@
 		"2a8a65c4-1f1a-4343-905c-3e63eef858ae",
 		"ae071940-d9cd-40bf-8a9f-df3bbe381edd",
 		"3acaae97-d8ad-4e13-b947-560dd8bffba9",
-		"84dd0004-0e5e-4da6-95d2-e10e6643af17"
+		"84dd0004-0e5e-4da6-95d2-e10e6643af17",
+		"e8915f92-c4de-44fe-be71-a350bcb47321"
 	],
 	"folders_order": [],
 	"protocolProfileBehavior": {},
@@ -143,6 +144,31 @@
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e8915f92-c4de-44fe-be71-a350bcb47321",
+			"name": "Data Retrieve",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/1/",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
 			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
 			"pathVariables": {}
 		}

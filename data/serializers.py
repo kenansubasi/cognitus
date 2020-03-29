@@ -14,3 +14,7 @@ class DataSerializerV1(serializers.ModelSerializer):
 
 class DataListSerializerV1(DataSerializerV1):
     pass
+
+
+class DataRetrieveSerializerV1(DataSerializerV1):
+    pass

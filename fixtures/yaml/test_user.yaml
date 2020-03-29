@@ -3,46 +3,46 @@
   pk: 1
   fields:
     date_joined: "2020-03-29 00:00:00.000000+00:00"
-    email: admin@cognitus.com
-    first_name: Admin
+    email: "admin@cognitus.com"
+    first_name: "Admin"
     groups: []
     is_active: true
     is_staff: true
     is_superuser: true
     last_login: "2020-03-29 00:00:00.000000+00:00"
-    last_name: Cognitus
-    password: pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U=  # password: secret
+    last_name: "Cognitus"
+    password: "pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U="  # password: secret
     user_permissions: []
-    username: admin
+    username: "admin"
 
 - model: auth.User
   pk: 2
   fields:
     date_joined: "2020-03-29 00:00:00.000000+00:00"
-    email: kenan.subasi@cognitus.com
-    first_name: Kenan
+    email: "kenan.subasi@cognitus.com"
+    first_name: "Kenan"
     groups: []
     is_active: true
     is_staff: true
     is_superuser: true
     last_login: "2020-03-29 00:00:00.000000+00:00"
-    last_name: Subaşı
-    password: pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U=  # password: secret
+    last_name: "Subaşı"
+    password: "pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U="  # password: secret
     user_permissions: []
-    username: kenan.subasi
+    username: "kenan.subasi"
 
 - model: auth.User
   pk: 3
   fields:
     date_joined: "2020-03-29 00:00:00.000000+00:00"
-    email: faruk.rahmet@cognitus.com
-    first_name: Faruk
+    email: "faruk.rahmet@cognitus.com"
+    first_name: "Faruk"
     groups: []
     is_active: true
     is_staff: true
     is_superuser: true
     last_login: "2020-03-29 00:00:00.000000+00:00"
-    last_name: Rahmet
-    password: pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U=  # password: secret
+    last_name: "Rahmet"
+    password: "pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U="  # password: secret
     user_permissions: []
-    username: faruk.rahmet
+    username: "faruk.rahmet"

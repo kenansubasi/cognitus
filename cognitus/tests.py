@@ -1,10 +1,13 @@
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
 from django.conf import settings
-from django.test import TestCase, Client
+from django.contrib.auth.models import User
+from django.test import TestCase
 
 
 class CognitusTestCase(TestCase):
+    USER_USERNAME = "admin"
     USER_PASSWORD = "secret"  # common password for each user.
 
     @classmethod
@@ -25,3 +28,8 @@ class CognitusApiTestCase(CognitusTestCase):
 
     def setUp(self):
         self.client = APIClient()
+        self.user = User.objects.get(username=self.USER_USERNAME)
+        self.token, created = Token.objects.get_or_create(user=self.user)
+
+    def api_authentication(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)

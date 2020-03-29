@@ -17,4 +17,4 @@ class Data(models.Model):
         unique_together = (("text", "label"),)
 
     def __str__(self):
-        return "{text} - {label}".format(text=self.text, label=self.label)
+        return f"{self.text} - {self.label}"

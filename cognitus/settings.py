@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # External Applications
     "rest_framework",
+    "rest_framework.authtoken",
     "drf_yasg",
 
     # Internal Applications
@@ -134,5 +135,5 @@ FIXTURE_DIRS = (
 # Docs
 
 SWAGGER_SETTINGS = {
-   "DEFAULT_INFO": "cognitus.urls.api_info",
+    "DEFAULT_INFO": "cognitus.urls.api_info",
 }

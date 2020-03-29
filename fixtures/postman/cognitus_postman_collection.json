@@ -1,0 +1,150 @@
+{
+	"id": "238f36cf-8461-4733-83ee-ff88ff8e0a8e",
+	"name": "cognitus",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"2a8a65c4-1f1a-4343-905c-3e63eef858ae",
+		"ae071940-d9cd-40bf-8a9f-df3bbe381edd",
+		"3acaae97-d8ad-4e13-b947-560dd8bffba9",
+		"84dd0004-0e5e-4da6-95d2-e10e6643af17"
+	],
+	"folders_order": [],
+	"protocolProfileBehavior": {},
+	"folders": [],
+	"requests": [
+		{
+			"id": "2a8a65c4-1f1a-4343-905c-3e63eef858ae",
+			"name": "User Login",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/login/",
+			"description": "",
+			"data": [],
+			"dataOptions": null,
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b97d303a-35c6-4493-8afc-535e07b4b3b0",
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    data = pm.response.json()",
+							"    pm.environment.set(\"AUTH_TOKEN\", data.auth_token)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n\t\"username\": \"{{USER_USERNAME}}\",\n\t\"password\": \"{{USER_PASSWORD}}\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3acaae97-d8ad-4e13-b947-560dd8bffba9",
+			"name": "User Retrieve",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/users/admin/",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "84dd0004-0e5e-4da6-95d2-e10e6643af17",
+			"name": "Data List",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ae071940-d9cd-40bf-8a9f-df3bbe381edd",
+			"name": "User Logout",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/logout/",
+			"description": "",
+			"data": [],
+			"dataOptions": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "95ee105b-8d5b-4ae6-a564-06acb8216f4e",
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    pm.environment.unset(\"AUTH_TOKEN\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"pathVariables": {}
+		}
+	]
+}

@@ -28,7 +28,8 @@ class CognitusTestCase(TestCase):
         super(CognitusTestCase, cls).setUpClass()
 
 
-class CognitusApiTestCase(CognitusTestCase):
+class CognitusApiV1TestCase(CognitusTestCase):
+    API_URL = "/api/v1"
 
     def setUp(self):
         self.client = APIClient()

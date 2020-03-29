@@ -10,6 +10,7 @@
 		"ae071940-d9cd-40bf-8a9f-df3bbe381edd",
 		"3acaae97-d8ad-4e13-b947-560dd8bffba9",
 		"84dd0004-0e5e-4da6-95d2-e10e6643af17",
+		"86b3d68c-ec93-458d-9e13-41172a001fd5",
 		"e8915f92-c4de-44fe-be71-a350bcb47321"
 	],
 	"folders_order": [],
@@ -103,6 +104,50 @@
 			"auth": null,
 			"events": null,
 			"folder": null,
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "86b3d68c-ec93-458d-9e13-41172a001fd5",
+			"name": "Data Create",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/",
+			"description": "",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c9542bc-f9e4-4a9e-95d6-402c05f74abc",
+						"exec": [
+							"if (pm.response.code == 201) {",
+							"    data = pm.response.json()",
+							"    pm.environment.set(\"DATA_ID\", data.id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n\t\"text\": \"evet\",\n\t\"label\": \"Confirmation_Yes\"\n}",
 			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
 			"pathVariables": {}
 		},

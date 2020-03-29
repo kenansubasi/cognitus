@@ -3,15 +3,17 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from data.models import Data
-from data.serializers import DataSerializerV1, DataListSerializerV1, DataRetrieveSerializerV1
+from data.serializers import DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataRetrieveSerializerV1
 
 
-class DataViewSetV1(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class DataViewSetV1(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Data.objects.all().order_by("-id")
 
     def get_serializer_class(self):
         if self.action == "list":
             return DataListSerializerV1
+        elif self.action == "create":
+            return DataCreateSerializerV1
         elif self.action == "retrieve":
             return DataRetrieveSerializerV1
         else:
@@ -24,3 +26,6 @@ class DataViewSetV1(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
     def get_permissions(self):
         permission_classes = (IsAuthenticated,)
         return [permission() for permission in permission_classes]
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)

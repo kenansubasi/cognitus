@@ -9,11 +9,18 @@ class DataSerializerV1(serializers.ModelSerializer):
 
     class Meta:
         model = Data
-        fields = ("id", "label", "text", "creator", "created_at", "updated_at")
+        fields = ("id", "text", "label", "creator", "created_at", "updated_at")
 
 
 class DataListSerializerV1(DataSerializerV1):
     pass
+
+
+class DataCreateSerializerV1(DataSerializerV1):
+
+    class Meta:
+        model = Data
+        fields = ("id", "text", "label")
 
 
 class DataRetrieveSerializerV1(DataSerializerV1):

@@ -12,7 +12,8 @@
 		"84dd0004-0e5e-4da6-95d2-e10e6643af17",
 		"86b3d68c-ec93-458d-9e13-41172a001fd5",
 		"e8915f92-c4de-44fe-be71-a350bcb47321",
-		"463d2deb-160d-4ced-8028-0ad688f62b5b"
+		"463d2deb-160d-4ced-8028-0ad688f62b5b",
+		"fa276609-184d-44d5-abd7-0fd70a280cba"
 	],
 	"folders_order": [],
 	"protocolProfileBehavior": {},
@@ -349,6 +350,63 @@
 			"queryParams": [],
 			"auth": null,
 			"events": null,
+			"folder": null,
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "fa276609-184d-44d5-abd7-0fd70a280cba",
+			"name": "Data Delete",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/{{DATA_ID}}/",
+			"description": "",
+			"data": null,
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": null,
+			"headerData": [
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}"
+				},
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Content-Type",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c9542bc-f9e4-4a9e-95d6-402c05f74abc",
+						"exec": [
+							"if (pm.response.code == 201) {",
+							"    data = pm.response.json()",
+							"    pm.environment.set(\"DATA_ID\", data.id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"folder": null,
 			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}

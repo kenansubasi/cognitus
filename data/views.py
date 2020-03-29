@@ -12,10 +12,11 @@ class DataViewSetV1(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,
                     mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
                     viewsets.GenericViewSet):
 
     def get_queryset(self):
-        if self.action in ["retrieve", "update"]:
+        if self.action in ["update", "destroy"]:
             return Data.objects.filter(creator=self.request.user).order_by("-id")
         else:
             return Data.objects.all().order_by("-id")

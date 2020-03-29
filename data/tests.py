@@ -93,6 +93,23 @@ class DataApiTestCase(CognitusApiTestCase):
         self.assertEqual(content.get("label"), "Confirmation_Yes")
         self.assertEqual(content.get("creator", {}).get("username"), self.USER_USERNAME)
 
-        different_data_url = f"/api/v1/data/4/"
-        response = self.client.put(different_data_url, data=data)
+        different_user_data_url = f"/api/v1/data/4/"
+        response = self.client.put(different_user_data_url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_data_destroy(self):
+        url = f"/api/v1/data/{self.DATA_ID}/"
+
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        self.api_authentication()
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+        different_user_data_url = f"/api/v1/data/4/"
+        response = self.client.delete(different_user_data_url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

@@ -3,11 +3,22 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from data.models import Data
-from data.serializers import DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataRetrieveSerializerV1
+from data.serializers import (
+    DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataUpdateSerializerV1, DataRetrieveSerializerV1
+)
 
 
-class DataViewSetV1(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
-    queryset = Data.objects.all().order_by("-id")
+class DataViewSetV1(mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
+                    mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    viewsets.GenericViewSet):
+
+    def get_queryset(self):
+        if self.action in ["retrieve", "update"]:
+            return Data.objects.filter(creator=self.request.user).order_by("-id")
+        else:
+            return Data.objects.all().order_by("-id")
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -16,6 +27,8 @@ class DataViewSetV1(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Retri
             return DataCreateSerializerV1
         elif self.action == "retrieve":
             return DataRetrieveSerializerV1
+        elif self.action == "update":
+            return DataUpdateSerializerV1
         else:
             return DataSerializerV1
 

@@ -10,6 +10,9 @@ class CognitusTestCase(TestCase):
     USER_ID = 1
     USER_USERNAME = "admin"
     USER_PASSWORD = "secret"  # common password for each user.
+    DATA_ID = 1
+    DATA_TEXT = "olmaz"
+    DATA_LABEL = "Confirmation_No"
 
     @classmethod
     def setUpClass(cls):

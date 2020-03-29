@@ -25,3 +25,10 @@ class DataCreateSerializerV1(DataSerializerV1):
 
 class DataRetrieveSerializerV1(DataSerializerV1):
     pass
+
+
+class DataUpdateSerializerV1(DataSerializerV1):
+
+    class Meta:
+        model = Data
+        fields = ("id", "text", "label")

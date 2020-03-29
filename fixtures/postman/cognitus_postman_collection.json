@@ -11,7 +11,8 @@
 		"3acaae97-d8ad-4e13-b947-560dd8bffba9",
 		"84dd0004-0e5e-4da6-95d2-e10e6643af17",
 		"86b3d68c-ec93-458d-9e13-41172a001fd5",
-		"e8915f92-c4de-44fe-be71-a350bcb47321"
+		"e8915f92-c4de-44fe-be71-a350bcb47321",
+		"463d2deb-160d-4ced-8028-0ad688f62b5b"
 	],
 	"folders_order": [],
 	"protocolProfileBehavior": {},
@@ -30,6 +31,13 @@
 					"key": "Content-Type",
 					"value": "application/json",
 					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
 					"enabled": true
 				}
 			],
@@ -54,7 +62,7 @@
 			],
 			"folder": null,
 			"rawModeData": "{\n\t\"username\": \"{{USER_USERNAME}}\",\n\t\"password\": \"{{USER_PASSWORD}}\"\n}",
-			"headers": "Content-Type: application/json\n",
+			"headers": "Content-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		},
 		{
@@ -71,6 +79,20 @@
 					"value": "Token {{AUTH_TOKEN}}",
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"method": "GET",
@@ -79,7 +101,65 @@
 			"auth": null,
 			"events": null,
 			"folder": null,
-			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "463d2deb-160d-4ced-8028-0ad688f62b5b",
+			"name": "Data Update",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/{{DATA_ID}}/",
+			"description": "",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}"
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c9542bc-f9e4-4a9e-95d6-402c05f74abc",
+						"exec": [
+							"if (pm.response.code == 201) {",
+							"    data = pm.response.json()",
+							"    pm.environment.set(\"DATA_ID\", data.id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n\t\"text\": \"yok\",\n\t\"label\": \"Confirmation_No\"\n}",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		},
 		{
@@ -96,6 +176,20 @@
 					"value": "Token {{AUTH_TOKEN}}",
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"method": "GET",
@@ -104,7 +198,7 @@
 			"auth": null,
 			"events": null,
 			"folder": null,
-			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		},
 		{
@@ -125,6 +219,20 @@
 					"enabled": true,
 					"key": "Authorization",
 					"value": "Token {{AUTH_TOKEN}}"
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"method": "POST",
@@ -148,7 +256,7 @@
 			],
 			"folder": null,
 			"rawModeData": "{\n\t\"text\": \"evet\",\n\t\"label\": \"Confirmation_Yes\"\n}",
-			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		},
 		{
@@ -164,6 +272,20 @@
 					"key": "Authorization",
 					"value": "Token {{AUTH_TOKEN}}",
 					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
 					"enabled": true
 				}
 			],
@@ -189,13 +311,13 @@
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
-			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		},
 		{
 			"id": "e8915f92-c4de-44fe-be71-a350bcb47321",
 			"name": "Data Retrieve",
-			"url": "{{BASE_URL}}/api/{{VERSION}}/data/1/",
+			"url": "{{BASE_URL}}/api/{{VERSION}}/data/{{DATA_ID}}/",
 			"description": "",
 			"data": null,
 			"dataOptions": null,
@@ -206,6 +328,20 @@
 					"enabled": true,
 					"key": "Authorization",
 					"value": "Token {{AUTH_TOKEN}}"
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"method": "GET",
@@ -214,7 +350,7 @@
 			"auth": null,
 			"events": null,
 			"folder": null,
-			"headers": "Authorization: Token {{AUTH_TOKEN}}\n",
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
 			"pathVariables": {}
 		}
 	]

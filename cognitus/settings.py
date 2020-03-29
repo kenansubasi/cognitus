@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     "drf_yasg",
 
     # Internal Applications
-    "cognitus"
+    "cognitus",
+    "data"
 ]
 
 MIDDLEWARE = [

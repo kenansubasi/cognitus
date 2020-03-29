@@ -14,6 +14,7 @@ class Command(BaseCommand):
 
         fixtures = [  # order is important!
             "test_user",
+            "test_data"
         ]
         for fixture in fixtures:
             self.stdout.write(f"Inserting fixture '{fixture}'...")

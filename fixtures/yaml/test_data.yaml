@@ -1,0 +1,90 @@
+# Data
+- model: data.Data
+  pk: 1
+  fields:
+    created_at: "2020-03-29 01:00:00.000000+00:00"
+    creator: 1 # admin
+    label: "Confirmation_No"
+    text: "olmaz"
+    updated_at: "2020-03-29 01:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 2
+  fields:
+    created_at: "2020-03-29 02:00:00.000000+00:00"
+    creator: 1 # admin
+    label: "Confirmation_No"
+    text: "hayır"
+    updated_at: "2020-03-29 02:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 3
+  fields:
+    created_at: "2020-03-29 03:00:00.000000+00:00"
+    creator: 2 # kenan.subasi
+    label: "Confirmation_No"
+    text: "asla"
+    updated_at: "2020-03-29 03:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 4
+  fields:
+    created_at: "2020-03-29 04:00:00.000000+00:00"
+    creator: 2 # kenan.subasi
+    label: "Confirmation_No"
+    text: "red"
+    updated_at: "2020-03-29 04:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 5
+  fields:
+    created_at: "2020-03-29 05:00:00.000000+00:00"
+    creator: 3 # faruk.rahmet
+    label: "Confirmation_Yes"
+    text: "olur"
+    updated_at: "2020-03-29 05:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 6
+  fields:
+    created_at: "2020-03-29 06:00:00.000000+00:00"
+    creator: 3 # faruk.rahmet
+    label: "Confirmation_Yes"
+    text: "onaylandı"
+    updated_at: "2020-03-29 06:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 7
+  fields:
+    created_at: "2020-03-29 07:00:00.000000+00:00"
+    creator: 3 # faruk.rahmet
+    label: "Confirmation_Yes"
+    text: "elbette"
+    updated_at: "2020-03-29 07:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 8
+  fields:
+    created_at: "2020-03-29 08:00:00.000000+00:00"
+    creator: 1 # admin
+    label: "Confirmation_Yes"
+    text: "memnuniyetle"
+    updated_at: "2020-03-29 08:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 9
+  fields:
+    created_at: "2020-03-29 09:00:00.000000+00:00"
+    creator: null
+    label: "Confirmation_Yes"
+    text: "tabii"
+    updated_at: "2020-03-29 09:00:00.000000+00:00"
+
+- model: data.Data
+  pk: 10
+  fields:
+    created_at: "2020-03-29 10:00:00.000000+00:00"
+    creator: null
+    label: "Confirmation_No"
+    text: "nayır"
+    updated_at: "2020-03-29 10:00:00.000000+00:00"

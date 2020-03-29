@@ -50,6 +50,12 @@ docker exec -i -t cognitus_web_1 /bin/bash
 coverage run manage.py test --noinput && coverage html --skip-covered
 ```
 
+To load init data:
+```
+docker exec -i -t cognitus_web_1 /bin/bash
+python manage.py initdb
+```
+
 
 ## Technologies
 

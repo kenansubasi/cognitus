@@ -6,6 +6,14 @@ services:
       POSTGRES_PASSWORD: secret
     ports:
       - 5432:5432
+
+  redis:
+    ports:
+      - 6379:6379
+
+  algorithm_celery:
+    entrypoint: /code/docker/algorithm_celery/entrypoint.sh
+
   web:
     command: python manage.py runserver 0:8000
     entrypoint: /code/docker/web/entrypoint.sh
@@ -13,10 +21,15 @@ services:
       - ..:/code
     ports:
       - 8000:8000
+
   algorithm:
-    command: python algorithm/app.py
+    command: flask run
     entrypoint: /code/docker/algorithm/entrypoint.sh
     volumes:
       - ..:/code
     ports:
       - 5000:5000
+    environment:
+      - FLASK_APP=/code/algorithm/app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_ENV=development

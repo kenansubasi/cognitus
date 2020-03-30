@@ -2,15 +2,30 @@ version: '3'
 services:
   db:
     image: postgres
+
+  redis:
+    image: redis
+
+  algorithm_celery:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: celery worker -B -l info -A algorithm
+    depends_on:
+      - redis
+
   web:
     build:
       context: ..
       dockerfile: docker/Dockerfile
     depends_on:
       - db
+      - algorithm_celery
+
   algorithm:
     build:
       context: ..
       dockerfile: docker/Dockerfile
     depends_on:
       - db
+      - algorithm_celery

@@ -47,5 +47,5 @@ urlpatterns = [
     path("api/v1/", include(router_v1.urls)),
     path("api/v1/login/", UserLoginViewV1.as_view(), name="login"),
     path("api/v1/logout/", UserLogoutViewV1.as_view(), name="logout"),
-    path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="docs"),
+    path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="docs"),
 ]

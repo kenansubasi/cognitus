@@ -1,35 +1,29 @@
 version: '3'
 services:
   db:
-    environment:
-      POSTGRES_USER: cognitus
-      POSTGRES_PASSWORD: secret
     ports:
       - 5432:5432
+    env_file:
+      - ./cognitus.env
 
   redis:
     ports:
       - 6379:6379
 
   algorithm_celery:
-    entrypoint: /code/docker/algorithm_celery/entrypoint.sh
+    env_file:
+      - ./cognitus.env
 
   web:
     command: python manage.py runserver 0:8000
-    entrypoint: /code/docker/web/entrypoint.sh
-    volumes:
-      - ..:/code
     ports:
       - 8000:8000
+    env_file:
+      - ./cognitus.env
 
   algorithm:
     command: flask run
-    entrypoint: /code/docker/algorithm/entrypoint.sh
-    volumes:
-      - ..:/code
     ports:
       - 5000:5000
-    environment:
-      - FLASK_APP=/code/algorithm/app.py
-      - FLASK_RUN_HOST=0.0.0.0
-      - FLASK_ENV=development
+    env_file:
+      - ./cognitus.env

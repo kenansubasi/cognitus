@@ -10,7 +10,10 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    command: celery worker -B -l info -A algorithm
+    command: celery worker -l info -A algorithm
+    entrypoint: /code/docker/algorithm_celery/entrypoint.sh
+    volumes:
+      - ..:/code
     depends_on:
       - redis
 
@@ -18,6 +21,9 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    entrypoint: /code/docker/web/entrypoint.sh
+    volumes:
+      - ..:/code
     depends_on:
       - db
       - algorithm_celery
@@ -26,6 +32,9 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    entrypoint: /code/docker/algorithm/entrypoint.sh
+    volumes:
+      - ..:/code
     depends_on:
       - db
       - algorithm_celery

@@ -5,16 +5,6 @@
     "ALLOWED_HOSTS": [
         "*"
     ],
-    "DATABASES": {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "cognitus",
-            "HOST": "db",
-            "PASSWORD": "secret",
-            "PORT": 5432,
-            "USER": "cognitus"
-        }
-    },
     "MEDIA_ROOT": "/code/tmp/media/",
     "MEDIA_URL": "/media/",
     "SECRET_KEY": "v)okxu^-wqui(#r!v^=11l)7mkvtoy@&^(o2l!1_l7x#p370ru",

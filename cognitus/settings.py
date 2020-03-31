@@ -90,6 +90,24 @@ TEMPLATES = [
 WSGI_APPLICATION = "cognitus.wsgi.application"
 
 
+# Database
+POSTGRES_USER = os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_DBNAME = os.environ.get("POSTGRES_DBNAME")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": POSTGRES_DBNAME,
+        "HOST": POSTGRES_HOST,
+        "USER": POSTGRES_USER,
+        "PASSWORD": POSTGRES_PASSWORD,
+        "PORT": POSTGRES_PORT,
+    }
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

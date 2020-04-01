@@ -113,3 +113,19 @@ class DataApiV1TestCase(CognitusApiV1TestCase):
         different_user_data_url = f"{self.API_URL}/data/4/"
         response = self.client.delete(different_user_data_url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class AlogrithmApiV1TestCase(CognitusApiV1TestCase):
+    fixtures = ("test_user", "test_data")
+
+    def test_train(self):
+        url = f"{self.API_URL}/algorithm/train/"
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        self.api_authentication()
+        response = self.client.get(url)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("count"), 10)

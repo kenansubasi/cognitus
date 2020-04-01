@@ -4,6 +4,7 @@ celery==4.3.0
 redis==3.4.1
 PyYAML==5.3.1
 coverage==5.0.4
+requests==2.23.0
 
 # Web application
 Django==2.2.11

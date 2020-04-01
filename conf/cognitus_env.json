@@ -1,6 +1,5 @@
 {
     "SERVER_TYPE": "development",
-    "APP_DOMAIN": "localhost:8000",
     "DEBUG": true,
     "ALLOWED_HOSTS": [
         "*"

@@ -1,7 +1,13 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
+from django.core.exceptions import ValidationError as BaseValidationError
+
+from data.helpers import AlgorithmServiceClient
 from data.models import Data
 from data.serializers import (
     DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataUpdateSerializerV1, DataRetrieveSerializerV1
@@ -43,3 +49,21 @@ class DataViewSetV1(mixins.ListModelMixin,
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
+
+
+class AlgorithmViewSetV1(viewsets.GenericViewSet):
+
+    def get_authenticators(self):
+        authentication_classes = (TokenAuthentication,)
+        return [auth() for auth in authentication_classes]
+
+    def get_permissions(self):
+        permission_classes = (IsAuthenticated,)
+        return [permission() for permission in permission_classes]
+
+    @action(detail=False, methods=["get"], url_path="train", url_name="train")
+    def train(self, request):
+        algorithm_service_client = AlgorithmServiceClient()
+        response = algorithm_service_client.train()
+
+        return Response(response.json(), status=response.status_code)

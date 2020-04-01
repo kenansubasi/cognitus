@@ -21,12 +21,13 @@ from rest_framework import routers, permissions
 from django.contrib import admin
 from django.urls import include, path
 
-from data.views import DataViewSetV1
+from data.views import AlgorithmViewSetV1, DataViewSetV1
 from users.views import UserLoginViewV1, UserLogoutViewV1, UserViewSetV1
 
 
 # Api
 router_v1 = routers.DefaultRouter()
+router_v1.register("algorithm", AlgorithmViewSetV1, basename="algorithm")
 router_v1.register("data", DataViewSetV1, basename="data")
 router_v1.register("users", UserViewSetV1, basename="users")
 

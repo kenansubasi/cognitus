@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, jsonify, make_response, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.automap import automap_base
 
 from algorithm.celery_app import train_task
 from algorithm.helpers import load_model
@@ -21,25 +22,24 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://{user}:{password}@{host}:{po
     user=POSTGRES_USER, password=POSTGRES_PASSWORD, host=POSTGRES_HOST, port=POSTGRES_PORT, dbname=POSTGRES_DBNAME
 )
 db = SQLAlchemy(app)
-Data = db.Table("data_data", db.metadata, autoload=True, autoload_with=db.engine)
-
+Base = automap_base()
+Base.prepare(db.engine, reflect=True)
+Data = Base.classes.data_data
 
 @app.route("/train/", methods=["GET"])
 def train():
-    data = db.session.query(Data).all()
-    text_list = []
-    label_list = []
+    db.session.query()
+    data = db.session.query(Data.text, Data.label).all()
 
-    for item in data:
-        text_list.append(item.text)
-        label_list.append(item.label)
-
-    data_count = len(text_list)
+    data_count = len(data)
     response = {
         "count": data_count
     }
 
     if data_count > 0:
+        data = list(zip(*data))
+        text_list = data[0]
+        label_list = data[1]
         train_task.delay(text_list, label_list)
         return make_response(jsonify(response), 200)
     else:

@@ -41,9 +41,9 @@ def train():
 
     if data_count > 0:
         train_task.delay(text_list, label_list)
-        return make_response(response, 200)
+        return make_response(jsonify(response), 200)
     else:
-        return make_response(response, 400)
+        return make_response(jsonify(response), 400)
 
 
 @app.route("/prediction/", methods=["POST"])
@@ -52,12 +52,12 @@ def prediction():
 
     text = request_data.get("text")
     if not text:
-        response = {
-            "text": {
-                "required": "This field is required!"
-            }
+        response =  {
+            "text": [
+                "This field is required!"
+            ]
         }
-        return make_response(response, 400)
+        return make_response(jsonify(response), 400)
 
     model_file = RESULTS_PATH + "model.pickle"
     vectorizer_file = RESULTS_PATH + "vectorizer.pickle"
@@ -67,7 +67,7 @@ def prediction():
                 "Model and Vectorizer data not found. Please train first."
             ]
         }
-        return make_response(response, 400)
+        return make_response(jsonify(response), 400)
 
     model = load_model(model_file)
     vectorizer = load_model(vectorizer_file)

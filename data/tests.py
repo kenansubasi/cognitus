@@ -129,3 +129,21 @@ class AlogrithmApiV1TestCase(CognitusApiV1TestCase):
         content = json.loads(response.content)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(content.get("count"), 10)
+
+    def test_prediction(self):
+        url = f"{self.API_URL}/algorithm/prediction/"
+        data = {
+            "text": "test"
+        }
+
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        self.api_authentication()
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        response = self.client.post(url, data=data)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(content.get("result")), 1)

@@ -13,7 +13,9 @@
 		"86b3d68c-ec93-458d-9e13-41172a001fd5",
 		"e8915f92-c4de-44fe-be71-a350bcb47321",
 		"463d2deb-160d-4ced-8028-0ad688f62b5b",
-		"fa276609-184d-44d5-abd7-0fd70a280cba"
+		"fa276609-184d-44d5-abd7-0fd70a280cba",
+		"f5c72f12-66d7-4367-843d-efdf02278948",
+		"d6f11be4-27b8-4575-bf75-6ac8abafde5a"
 	],
 	"folders_order": [],
 	"protocolProfileBehavior": {},
@@ -316,6 +318,51 @@
 			"pathVariables": {}
 		},
 		{
+			"id": "d6f11be4-27b8-4575-bf75-6ac8abafde5a",
+			"name": "Algorithm Prediction",
+			"url": "localhost:8000/api/v1/algorithm/prediction/",
+			"description": "",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "TOKEN {{AUTH_TOKEN}}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n\t\"text\": \"test\"\n}\n",
+			"headers": "Authorization: TOKEN {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
+			"pathVariables": {}
+		},
+		{
 			"id": "e8915f92-c4de-44fe-be71-a350bcb47321",
 			"name": "Data Retrieve",
 			"url": "{{BASE_URL}}/api/{{VERSION}}/data/{{DATA_ID}}/",
@@ -343,6 +390,45 @@
 					"description": "",
 					"type": "text",
 					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Token {{AUTH_TOKEN}}\nContent-Type: application/json\nAccept: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f5c72f12-66d7-4367-843d-efdf02278948",
+			"name": "Algorithm Train",
+			"url": "localhost:8000/api/v1/algorithm/train/",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Token {{AUTH_TOKEN}}"
+				},
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Content-Type",
+					"type": "text",
+					"value": "application/json"
+				},
+				{
+					"description": "",
+					"enabled": true,
+					"key": "Accept",
+					"type": "text",
+					"value": "application/json"
 				}
 			],
 			"method": "GET",

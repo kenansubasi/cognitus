@@ -1,16 +1,14 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
-from django.core.exceptions import ValidationError as BaseValidationError
 
 from data.helpers import AlgorithmServiceClient
 from data.models import Data
 from data.serializers import (
-    DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataUpdateSerializerV1, DataRetrieveSerializerV1
+    DataSerializerV1, DataListSerializerV1, DataCreateSerializerV1, DataUpdateSerializerV1, DataRetrieveSerializerV1,
+    PredictionSerializerV1
 )
 
 
@@ -67,3 +65,15 @@ class AlgorithmViewSetV1(viewsets.GenericViewSet):
         response = algorithm_service_client.train()
 
         return Response(response.json(), status=response.status_code)
+
+    @action(detail=False, methods=["post"], url_path="prediction", url_name="prediction")
+    def prediction(self, request):
+        serializer = PredictionSerializerV1(data=request.data)
+
+        if serializer.is_valid():
+            algorithm_service_client = AlgorithmServiceClient()
+            response = algorithm_service_client.prediction(serializer.validated_data.get("text"))
+
+            return Response(response.json(), status=response.status_code)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

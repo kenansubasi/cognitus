@@ -44,16 +44,17 @@ To status docker containers:
 docker-compose -p cognitus -f docker/docker-compose.yml -f docker/docker-compose.dev.yml ps
 ```
 
-To run tests:
-```
-docker exec -i -t cognitus_web_1 /bin/bash
-coverage run manage.py test --noinput && coverage html --skip-covered
-```
-
 To load init data:
 ```
 docker exec -i -t cognitus_web_1 /bin/bash
 python manage.py initdb
+```
+
+
+To run tests:
+```
+docker exec -i -t cognitus_web_1 /bin/bash
+coverage run manage.py test --noinput && coverage html --skip-covered
 ```
 
 

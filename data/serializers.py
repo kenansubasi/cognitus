@@ -32,3 +32,10 @@ class DataUpdateSerializerV1(DataSerializerV1):
     class Meta:
         model = Data
         fields = ("id", "text", "label")
+
+
+class PredictionSerializerV1(serializers.Serializer):
+    text = serializers.CharField(required=True)
+
+    class Meta:
+        fields = ("text")

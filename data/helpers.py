@@ -1,7 +1,7 @@
+import json
 import os
-import requests
 
-from django.core.exceptions import ValidationError as BaseValidationError
+import requests
 
 from cognitus.constants import ALGORITHM_SERVICE_DOMAIN, ALGORITHM_SERVICE_TIMEOUT
 
@@ -12,9 +12,14 @@ class AlgorithmServiceClient(object):
         self.base_url = base_url or ALGORITHM_SERVICE_DOMAIN
 
     def request(self, method, path, data=None, params=None, timeout=ALGORITHM_SERVICE_TIMEOUT):
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
         response = requests.request(
-            method,
-            os.path.join(self.base_url, path),
+            method=method,
+            url=os.path.join(self.base_url, path),
+            headers=headers,
             data=data,
             params=params,
             timeout=timeout
@@ -24,3 +29,9 @@ class AlgorithmServiceClient(object):
 
     def train(self):
         return self.request("get", "train/", timeout=ALGORITHM_SERVICE_TIMEOUT)
+
+    def prediction(self, text):
+        data = json.dumps({
+            "text": text
+        })
+        return self.request("post", "prediction/", data=data, timeout=ALGORITHM_SERVICE_TIMEOUT)

@@ -64,11 +64,17 @@ This is a list of mostly used awesome technologies and libraries that are used i
 
 - [Python](https://www.python.org/): Python is an interpreted high-level programming language for general-purpose programming.
 
+- [Flask](https://palletsprojects.com/p/flask/): Flask is a lightweight WSGI web application framework.
+
 - [Django](https://www.djangoproject.com/): Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 
 - [PostgreSQL](https://www.postgresql.org/): PostgreSQL is a powerful, open source object-relational database system that has strong reputation for reliability, feature robustness, and performance.
 
 - [Django Rest Framework](https://www.django-rest-framework.org/): Django REST framework is a powerful and flexible toolkit for building Web APIs.
+
+- [Celery](http://www.celeryproject.org/): Celery is an asynchronous task queue/job queue based on distributed message passing.
+
+- [Redis](https://redis.io/): Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
 
 ## Maintainers

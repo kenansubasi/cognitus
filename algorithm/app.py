@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from flask import Flask, jsonify, make_response, request
 from flask_sqlalchemy import SQLAlchemy
@@ -7,17 +8,14 @@ from sqlalchemy.ext.automap import automap_base
 from algorithm.celery_app import train_task
 from algorithm.helpers import load_model
 
+from conf.constants import RESULTS_PATH, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DBNAME
+
+
 # App
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-RESULTS_PATH = os.environ.get("RESULTS_PATH", "/code/results/")
 
 # DB Config
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_DBNAME = os.environ.get("POSTGRES_DBNAME")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://{user}:{password}@{host}:{port}/{dbname}".format(
     user=POSTGRES_USER, password=POSTGRES_PASSWORD, host=POSTGRES_HOST, port=POSTGRES_PORT, dbname=POSTGRES_DBNAME
 )
@@ -25,24 +23,46 @@ db = SQLAlchemy(app)
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 Data = Base.classes.data_data
+Train = Base.classes.data_train
+
 
 @app.route("/train/", methods=["GET"])
 def train():
-    db.session.query()
+    last_train = db.session.query(Train.task_id).order_by(Train.id.desc()).first()
+    if last_train != None:
+        last_train_state = train_task.AsyncResult(last_train.task_id).state
+        if last_train_state == "PENDING":
+            response = {
+                "non_field_errors": [
+                    "Please wait for the last train to end!"
+                ]
+            }
+            return make_response(jsonify(response), 400)
+
     data = db.session.query(Data.text, Data.label).all()
-
     data_count = len(data)
-    response = {
-        "count": data_count
-    }
-
     if data_count > 0:
         data = list(zip(*data))
         text_list = data[0]
         label_list = data[1]
-        train_task.delay(text_list, label_list)
+
+        task = train_task.delay(text_list, label_list)
+        today = datetime.datetime.now()
+        train = Train(task_id=task.task_id, created_at=today, updated_at=today)
+        db.session.add(train)
+        db.session.commit()
+
+        response = {
+            "count": data_count,
+            "task_id": task.task_id
+        }
         return make_response(jsonify(response), 200)
     else:
+        response = {
+            "non_field_errors": [
+                "Data not found!"
+            ]
+        }
         return make_response(jsonify(response), 400)
 
 

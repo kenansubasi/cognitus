@@ -1,0 +1,20 @@
+import os
+
+# Base
+RESULTS_PATH = os.environ.get("RESULTS_PATH", "/code/results/")
+
+# DB
+POSTGRES_USER = os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_DBNAME = os.environ.get("POSTGRES_DBNAME")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+
+# Celery
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+
+# Web Application
+WEB_APP_DOMAIN = os.environ.get("WEB_APP_DOMAIN")
+ALGORITHM_SERVICE_DOMAIN = os.environ.get("ALGORITHM_SERVICE_DOMAIN")
+ALGORITHM_SERVICE_TIMEOUT = os.environ.get("ALGORIHTM_SERVICE_TIMEOUT", 60)

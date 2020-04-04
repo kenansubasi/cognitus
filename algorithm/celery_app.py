@@ -4,11 +4,10 @@ from celery import Celery
 from sklearn import cross_validation
 
 from algorithm.helpers import tfidf, test_SVM, dump_model
+from conf.constants import RESULTS_PATH, CELERY_BROKER_URL, CELERY_RESULT_BACKEND
+
 
 # Celery Config
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
-RESULTS_PATH = os.environ.get("RESULTS_PATH", "/code/results/")
 celery_app = Celery("algorithm", broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND)
 
 

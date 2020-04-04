@@ -3,7 +3,7 @@ import os
 
 import requests
 
-from cognitus.constants import ALGORITHM_SERVICE_DOMAIN, ALGORITHM_SERVICE_TIMEOUT
+from conf.constants import ALGORITHM_SERVICE_DOMAIN, ALGORITHM_SERVICE_TIMEOUT
 
 
 class AlgorithmServiceClient(object):
